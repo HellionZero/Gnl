@@ -6,7 +6,7 @@
 /*   By: lsrtn_soft <lsrtn_soft@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/15 22:39:38 by lsrtn_soft        #+#    #+#             */
-/*   Updated: 2025/08/15 23:10:11 by lsrtn_soft       ###   ########.fr       */
+/*   Updated: 2025/08/18 20:50:08 by lsrtn_soft       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,8 @@
 # include<unistd.h>
 # include<stdlib.h>
 
-typedef struct s_list
-{
-	char			*string;
-	struct s_list	*next;
-}	t_list;
-
 char	*get_next_line(int fd);
+void	*ft_calloc(size_t count, size_t size);
+
 
 #endif
