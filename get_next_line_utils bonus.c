@@ -1,16 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*   get_next_line_utils bonus.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lsrtn_soft <lsrtn_soft@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/15 22:38:13 by lsrtn_soft        #+#    #+#             */
-/*   Updated: 2025/08/22 18:54:42 by lsrtn_soft       ###   ########.fr       */
+/*   Updated: 2025/08/22 14:46:52 by lsrtn_soft       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+
+void	fill_str(char *res, char *s1, char *s2)
+{
+	unsigned int	i;
+	unsigned int	j;
+
+	i = 0;
+	j = 0;
+	while (s1[j])
+		res[i++] = s1[j++];
+	j = 0;
+	while (s2[j])
+		res[i++] = s2[j++];
+	res[i] = '\0';
+}
 
 char	*ft_strdup(char *s1)
 {
@@ -35,8 +50,6 @@ size_t	ft_strlen(char *s)
 	int	i;
 
 	i = 0;
-	if(!s)
-		return (0);
 	while (s[i])
 		i++;
 	return (i);
@@ -66,29 +79,15 @@ char	*ft_substr(char *s, unsigned int start, size_t len)
 	return (str);
 }
 
-char *ft_strjoin(const char *s1, const char *s2)
+char	*ft_strjoin(char *s1, char *s2)
 {
-    char 	*res;
-	size_t	sum;
-    int 	i;
-    int 	j;
-    
-    i = 0;
-    j = 0;
-	sum = ft_strlen((char *)s1) + ft_strlen((char *)s2);
-    res = (char *)malloc(sum + 1);
-    if (!res)
-        return (NULL);
-    while (s1[i])
-	{
-        res[i] = s1[i];
-		i++;
-	}
-    while (s2[j])
-        res[i + j] = s2[j];
-		j++;
-    res[i + j] = 0;
-    return (res);
+	char			*res;
+
+	res = (char *) malloc((ft_strlen(s1) + ft_strlen(s2) + 1) * sizeof(char));
+	if (!res)
+		return (NULL);
+	fill_str(res, s1, s2);
+	return (res);
 }
 
 void	*ft_calloc(size_t count, size_t size)
