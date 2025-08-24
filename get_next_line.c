@@ -6,7 +6,7 @@
 /*   By: lsrtn_soft <lsrtn_soft@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/15 22:37:55 by lsrtn_soft        #+#    #+#             */
-/*   Updated: 2025/08/24 13:03:30 by lsrtn_soft       ###   ########.fr       */
+/*   Updated: 2025/08/24 16:02:22 by lsrtn_soft       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,12 +111,11 @@ char	*read_file(int fd, char *remain)
 	char	*tmp;
 	ssize_t	ch_read;
 
-	
 	storage = (char *)ft_calloc(BUFFER_SIZE + 1, sizeof(char));
 	if (!storage)
 		return (NULL);
 	ch_read = 1;
-	while (ch_read > 0)
+	while (ch_read > 0 && !ft_strchr(storage, '\n'))
 	{
 		ch_read = read(fd, storage, BUFFER_SIZE);
 		if (ch_read == -1)
@@ -135,16 +134,59 @@ char	*read_file(int fd, char *remain)
 	return (remain);
 }
 
+char	*get_line(char *line)
+{
+	char	*tmp;
+	ssize_t	i;
+
+	i = 0;
+	while (line[i] && line[i] != '\n')
+		i++;
+	tmp = (char *)ft_calloc(i + 2, sizeof(char));
+	if (!tmp)
+		return (NULL);
+	i = 0;
+	while (line[i] && line[i] != '\n')
+	{
+		tmp[i] = line[i];
+		i++;
+	}
+	free(line);
+	line = NULL;
+	return (tmp);
+}
+
+char	*get_remain(char *line)
+{
+	char	*remain;
+	size_t	i;
+
+	i = 0;
+	while (line[i] && line[i] != '\n')
+		i++;
+	if (line[i] == '\n')
+	{
+		remain = ft_substr(line, i + 1, (ft_strlen(line) - i));
+		if (!remain)
+		{
+			free(line);
+			return (NULL);
+		}
+		return (remain);
+	}
+	return (NULL);
+}
+
 char	*get_next_line(int fd)
 {
 	static char	*remain;
 	char		*line;
-
+	
 	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0)
 		return (NULL);
 	line = read_file(fd, remain);
-	if (!line)
-		return (NULL);
+	remain = get_remain(line);
+	line = get_line(line);
 	return (line);
 }
 
@@ -157,6 +199,10 @@ int	main(void)
 	int		fd;
 
 	fd = open("test.txt", O_RDONLY);
+	text = get_next_line(fd);
+	printf("%s\n", text);
+	text = get_next_line(fd);
+	printf("%s\n", text);
 	text = get_next_line(fd);
 	printf("%s\n", text);
 	free(text);
