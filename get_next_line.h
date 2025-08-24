@@ -6,7 +6,7 @@
 /*   By: lsrtn_soft <lsrtn_soft@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/15 22:39:38 by lsrtn_soft        #+#    #+#             */
-/*   Updated: 2025/08/24 12:12:42 by lsrtn_soft       ###   ########.fr       */
+/*   Updated: 2025/08/24 12:56:54 by lsrtn_soft       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,5 @@ char 	*ft_strchr(const char *s, int c);
 size_t	ft_strlen(char *s);
 char	*ft_substr(char *s, unsigned int start, size_t len);
 char	*ft_strjoin(const char *s1, const char *s2);
-void	fill_str(char *res, char *s1, char *s2);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: lsrtn_soft <lsrtn_soft@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/15 22:38:13 by lsrtn_soft        #+#    #+#             */
-/*   Updated: 2025/08/22 18:54:42 by lsrtn_soft       ###   ########.fr       */
+/*   Updated: 2025/08/24 13:15:39 by lsrtn_soft       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,15 +68,13 @@ char	*ft_substr(char *s, unsigned int start, size_t len)
 
 char *ft_strjoin(const char *s1, const char *s2)
 {
-    char 	*res;
-	size_t	sum;
-    int 	i;
-    int 	j;
+    char *res;
+    int i;
+    int j;
     
     i = 0;
     j = 0;
-	sum = ft_strlen((char *)s1) + ft_strlen((char *)s2);
-    res = (char *)malloc(sum + 1);
+    res = (char *) malloc((ft_strlen((char *)s1) + ft_strlen((char *)s2) + 1) * sizeof(char));
     if (!res)
         return (NULL);
     while (s1[i])
@@ -85,9 +83,11 @@ char *ft_strjoin(const char *s1, const char *s2)
 		i++;
 	}
     while (s2[j])
-        res[i + j] = s2[j];
+	{
+        res[j + i] = s2[j];
 		j++;
-    res[i + j] = 0;
+	}
+    res[j + i] = 0;
     return (res);
 }
 

@@ -6,7 +6,7 @@
 /*   By: lsrtn_soft <lsrtn_soft@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/15 22:37:55 by lsrtn_soft        #+#    #+#             */
-/*   Updated: 2025/08/24 12:26:33 by lsrtn_soft       ###   ########.fr       */
+/*   Updated: 2025/08/24 13:03:30 by lsrtn_soft       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,11 +108,10 @@ char	*get_next_line(int fd)
 char	*read_file(int fd, char *remain)
 {
 	char	*storage;
-	char	*joined;
+	char	*tmp;
 	ssize_t	ch_read;
 
-	if (!remain)
-		remain = ft_calloc(1, 1);
+	
 	storage = (char *)ft_calloc(BUFFER_SIZE + 1, sizeof(char));
 	if (!storage)
 		return (NULL);
@@ -126,10 +125,14 @@ char	*read_file(int fd, char *remain)
 			return (NULL);
 		}
 		storage[ch_read] = 0;
-		joined = ft_strjoin(remain, storage);
+		if (!remain)
+			remain = ft_calloc(1, 1);
+		tmp = remain;
+		remain = ft_strjoin(tmp, storage);
+		free(tmp);
+		tmp = NULL;
 	}
-	free(storage);
-	return (joined);
+	return (remain);
 }
 
 char	*get_next_line(int fd)
