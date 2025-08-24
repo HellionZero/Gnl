@@ -6,7 +6,7 @@
 /*   By: lsrtn_soft <lsrtn_soft@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/15 22:39:38 by lsrtn_soft        #+#    #+#             */
-/*   Updated: 2025/08/22 18:54:10 by lsrtn_soft       ###   ########.fr       */
+/*   Updated: 2025/08/24 12:12:42 by lsrtn_soft       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define GET_NEXT_LINE_H
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 42
+#  define BUFFER_SIZE 1
 # endif
 
 # include <unistd.h>
